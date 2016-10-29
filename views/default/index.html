@@ -45,8 +45,13 @@
         <div class="post_list">
             <div v-for="post in posts">
                 <p>${post.user_email}</p>
+                <p>${post.post_content}</p>
+                <p>${post.created_on}</p>
                 <i class="fa fa-trash-o" v-on:click="delete_post(post.id)"></i>
+                <br><br>
             </div>
+
+
         </div>
         <!--old code here -->
 

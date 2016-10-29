@@ -18,7 +18,7 @@ var app = function() {
             start_idx: start_idx,
             end_idx: end_idx
         }
-        console.log(get_posts_url + "?" + $.param(pp))
+        //console.log(get_posts_url + "?" + $.param(pp))
         return get_posts_url + "?" + $.param(pp)
     }
 
@@ -89,7 +89,8 @@ var app = function() {
             posts: [],
             has_more: false,
             is_adding_post: false,
-            form_content: null
+            form_content: null,
+            logged_in: false
         },
         methods: {
             get_more: self.get_more,
