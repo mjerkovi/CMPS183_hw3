@@ -28,6 +28,7 @@ var app = function() {
             self.vue.posts = data.posts;
             self.vue.has_more = data.has_more;
             self.vue.logged_in = data.logged_in;
+            self.vue.loggedin_user_email = data.loggedin_user_email;
         })
 
     };
@@ -90,7 +91,8 @@ var app = function() {
             has_more: false,
             is_adding_post: false,
             form_content: null,
-            logged_in: false
+            logged_in: false,
+            loggedin_user_email: null
         },
         methods: {
             get_more: self.get_more,

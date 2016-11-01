@@ -20,17 +20,18 @@ def get_posts():
                 post_content = r.post_content,
                 created_on = r.created_on,
                 updated_on = r.updated_on,
-                user_id = r.user_id,
             )
             posts.append(t)
         else:
             has_more = True
-        logged_in = auth.user_id is not None
+    logged_in = auth.user_id is not None
+    loggedin_user_email = auth.user.email if auth.user_id else None
     return response.json(dict(
-        posts = posts,
-        logged_in = logged_in,
-        has_more = has_more,
-    ))
+            posts = posts,
+            logged_in = logged_in,
+            has_more = has_more,
+            loggedin_user_email = loggedin_user_email,
+        ))
 
 
 
