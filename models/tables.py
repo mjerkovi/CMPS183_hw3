@@ -14,7 +14,7 @@ db.define_table('post',
                 Field('post_content', 'text'),
                 Field('created_on', 'datetime', default=datetime.datetime.utcnow()),
                 Field('updated_on', 'datetime', update=datetime.datetime.utcnow()),
-                
+                Field('user_id', db.auth_user, default=auth.user_id),
                 )
 
 # I don't want to display the user email by default in all forms.

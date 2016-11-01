@@ -11,7 +11,7 @@ def get_posts():
     end_idx = int(request.vars.end_idx) if request.vars.end_idx is not None else 0
     posts = []
     has_more = False
-    rows = db().select(db.post.ALL, limitby=(start_idx, end_idx + 1))
+    rows = db().select(db.post.ALL, limitby=(start_idx, end_idx + 1), orderby=~db.post.created_on)
     for i, r in enumerate(rows):
         if i < end_idx - start_idx:
             t = dict(
@@ -20,6 +20,7 @@ def get_posts():
                 post_content = r.post_content,
                 created_on = r.created_on,
                 updated_on = r.updated_on,
+                user_id = r.user_id,
             )
             posts.append(t)
         else:

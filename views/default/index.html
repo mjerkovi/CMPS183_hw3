@@ -18,14 +18,14 @@
 
         <div class="button_bar">
             <button v-if="!is_adding_post" class="btn btn-danger btn-sm" v-on:click="add_post_button()" v-bind:class="{'disabled': !logged_in}">
-                <i class="fa fa-plus"></i> New Post
+                <i class="fa fa-plus"></i> Add new post
             </button>
             <button v-if="is_adding_post" class="btn btn-warning btn-sm" v-on:click="add_post_button()">
                 <i class="fa fa-times"></i> Cancel
             </button>
         </div>
 
-        <div v-if="is_adding_post">
+        <div id="add-new-post" v-if="is_adding_post">
             <form action="#" v-on:submit.prevent="add_post" class="form-horizontal" enctype="multipart/form-data" method="post">
                 <div class="form-group" id="no_table_artist__row">
                     <div>
@@ -34,9 +34,7 @@
                     </div>
                 </div>
                 <div class="form-group" id="submit_record__row">
-                    <div>
-                        <input class="btn btn-primary" id="add_post_submit" type="submit" value="Submit" />
-                    </div>
+                        <input class="btn btn-primary post-button" id="add_post_submit" type="submit" value="Post" />
                 </div>
             </form>
         </div>
@@ -44,23 +42,24 @@
         <!--old code here -->
         <div class="post_list">
             <div v-for="post in posts">
-                <p>${post.user_email}</p>
-                <p>${post.post_content}</p>
-                <p>${post.created_on}</p>
-                <i class="fa fa-trash-o" v-on:click="delete_post(post.id)"></i>
-                <br><br>
+                <div class="post-content">
+                    <p>${post.user_email}</p>
+                    <p>${post.post_content}</p>
+                    <p>${post.created_on}</p>
+                    <i v-if="post.user_id=={{=auth.user_id}}" class="fa fa-trash-o" v-on:click="delete_post(post.id)"></i>
+                    <i v-if="post.user_id=={{=auth.user_id}}" class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+                    <br><br>
+                </div>
             </div>
-
-
         </div>
-        <!--old code here -->
 
 
-        <div v-if="has_more" class="show_more">
+
+        <div v-if="has_more" class="load-more">
                 <button class="btn btn-default" v-on:click="get_more()">Load more</button>
         </div>
 
-    </div><!-- end vue div-->
+    </div>
 
 </div>
 
