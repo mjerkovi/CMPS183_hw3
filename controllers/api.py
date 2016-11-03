@@ -1,6 +1,14 @@
 # These are the controllers for your ajax api.
 from aetypes import end
 
+def get_user_name_from_email(email):
+    """Returns a string corresponding to the user first and last names,
+    given the user email."""
+    u = db(db.auth_user.email == email).select().first()
+    if u is None:
+        return 'None'
+    else:
+        return ' '.join([u.first_name, u.last_name])
 
 def get_posts():
     """This controller is used to get the posts.  Follow what we did in lecture 10, to ensure
@@ -18,8 +26,9 @@ def get_posts():
                 id = r.id,
                 user_email = r.user_email,
                 post_content = r.post_content,
-                created_on = r.created_on,
+                created_on = r.created_on.strftime("%B %d 20%y   %H:%M"),
                 updated_on = r.updated_on,
+                user_name = get_user_name_from_email(r.user_email),
             )
             posts.append(t)
         else:

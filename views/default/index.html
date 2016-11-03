@@ -43,11 +43,17 @@
         <div class="post_list">
             <div v-for="post in posts">
                 <div class="post-content">
-                    <p>${post.user_email}</p>
-                    <p>${post.post_content}</p>
-                    <p>${post.created_on}</p>
-                    <i v-if="post.user_email==loggedin_user_email" class="fa fa-trash-o" v-on:click="delete_post(post.id)"></i>
-                    <i v-if="post.user_email==loggedin_user_email" class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i>
+                    <p>${post.user_name}</p>
+                    <div class="content">
+                        ${post.post_content}
+                    </div>
+                    <div class="created_on">
+                        ${post.created_on}
+                    </div>
+                    <div class="edit_trash_button">
+                        <i v-if="post.user_email===loggedin_user_email" class="fa fa-trash-o" v-on:click="delete_post(post.id)"></i>
+                        <i v-if="post.user_email===loggedin_user_email" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </div>
                     <br><br>
                 </div>
             </div>

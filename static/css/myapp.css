@@ -10,7 +10,7 @@
 }
 
 /* line 11, ../sass/_main.scss */
-.post {
+.post-content {
   border-color: #cccccc;
   border-style: solid;
   border-width: 1px;
@@ -20,4 +20,23 @@
   -moz-border-radius: 16px;
   -webkit-border-radius: 16px;
   border-radius: 16px;
+}
+
+/* line 21, ../sass/_main.scss */
+.content {
+  font-size: 25px;
+  word-wrap: break-word;
+  padding: 0px 25px 10px 10px;
+}
+
+/* line 27, ../sass/_main.scss */
+.created_on {
+  display: inline-block;
+  margin-right: 30px;
+  color: #327bff;
+}
+
+/* line 33, ../sass/_main.scss */
+.edit_trash_button {
+  float: right;
 }

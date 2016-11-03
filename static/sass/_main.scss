@@ -8,7 +8,7 @@
   padding-top: 10px;
 }
 
-.post {
+.post-content {
   border-color: $clrPostBorder;
   border-style: solid;
   border-width: 1px;
@@ -16,4 +16,20 @@
   margin: 20px 0px 20px 0px;
   padding: 20px;
   @include border-radius(16px);
+}
+
+.content {
+  font-size: 25px;
+  word-wrap: break-word;
+  padding: 0px 25px 10px 10px;
+}
+
+.created_on {
+  display: inline-block;
+  margin-right: 30px;
+  color: #327bff;
+}
+
+.edit_trash_button {
+  float: right;
 }
