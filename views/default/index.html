@@ -42,7 +42,7 @@
         <!--old code here -->
         <div class="post_list">
             <div v-for="post in posts">
-                <div class="post-content">
+                <div class="post-content" v-if="post.id != currently_editing">
                     <p>${post.user_name}</p>
                     <div class="content">
                         ${post.post_content}
@@ -52,10 +52,22 @@
                     </div>
                     <div class="edit_trash_button">
                         <i v-if="post.user_email===loggedin_user_email" class="fa fa-trash-o" v-on:click="delete_post(post.id)"></i>
-                        <i v-if="post.user_email===loggedin_user_email" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <i v-if="post.user_email===loggedin_user_email" class="fa fa-pencil-square-o" aria-hidden="true" v-on:click="update_currently_editing(post.id)"></i>
                     </div>
                     <br><br>
                 </div>
+                <div v-if="post.id == currently_editing">
+                    <textarea v-model="edit_content">
+                    </textarea>
+                    <button class="btn btn-danger btn-sm" v-on:click="submit_edit()">
+                        Post Edit
+                    </button>
+                    <button class="btn btn-warning btn-sm" v-on:click="update_currently_editing(0)">
+                        <i class="fa fa-times"></i> Cancel
+                    </button>
+
+                </div>
+
             </div>
         </div>
 

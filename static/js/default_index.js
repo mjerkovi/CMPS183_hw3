@@ -81,6 +81,16 @@ var app = function() {
         )
     }
 
+    self.update_currently_editing = function(post_id) {
+        self.vue.currently_editing = post_id;
+    }
+
+    self.submit_edit = function(post_id) {
+
+        self.vue.currently_editing = 0;
+        self.vue.edit_content = null;
+    }
+
     // Complete as needed.
     self.vue = new Vue({
         el: "#vue-div",
@@ -92,13 +102,17 @@ var app = function() {
             is_adding_post: false,
             form_content: null,
             logged_in: false,
-            loggedin_user_email: null
+            loggedin_user_email: null,
+            currently_editing: 0,
+            edit_content: null
         },
         methods: {
             get_more: self.get_more,
             add_post_button: self.add_post_button,
             add_post: self.add_post,
-            delete_post: self.delete_post
+            delete_post: self.delete_post,
+            update_currently_editing: self.update_currently_editing,
+            submit_edit: self.submit_edit
         }
 
     });
