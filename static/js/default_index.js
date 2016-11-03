@@ -86,9 +86,31 @@ var app = function() {
     }
 
     self.submit_edit = function(post_id) {
+        $.post(edit_post_url,
+            {
+                post_id: post_id,
+                edit_content: self.vue.edit_content
+            },
+            function () {
+                var idx = null;
+                for(var i = 0; i< self.vue.posts.length; i++){
+                    if(post_id === self.vue.posts[i].id){
+                        idx = i;
+                        break;
+                    }
+                }
+                if (idx) {
+                    self.vue.posts[i].post_content = edit_content; //or maybe consider passing the data back from the
+                                                                    // and do something like self.vue.posts[i].post_content = data.edit_content
+                }
+                self.vue.currently_editing = 0;
+                self.vue.edit_content = null;
+            }
 
-        self.vue.currently_editing = 0;
-        self.vue.edit_content = null;
+        )
+
+
+
     }
 
     // Complete as needed.
