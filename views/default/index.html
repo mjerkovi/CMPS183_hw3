@@ -18,7 +18,7 @@
         <!-- Your code goes here.  Remember to call $("#vue-div").show() once you get the data for the first time. -->
 
         <div class="button_bar">
-            <button v-if="!is_adding_post" class="btn btn-danger btn-sm" v-on:click="add_post_button()" v-bind:class="{'disabled': !logged_in}">
+            <button v-if="!is_adding_post" class="btn btn-danger btn-sm" v-on:click="add_post_button()" v-bind:disabled="!logged_in">
                 <i class="fa fa-plus"></i> Add new post
             </button>
             <button v-if="is_adding_post" class="btn btn-warning btn-sm" v-on:click="add_post_button()">
@@ -51,6 +51,9 @@
                     <div class="created_on">
                         ${post.created_on}
                     </div>
+                    <div class="edited_on" v-if="post.created_on != post.updated_on">
+                        Edited on: ${post.updated_on}
+                    </div>
                     <div class="edit_trash_button">
                         <i v-if="post.user_email===loggedin_user_email" class="fa fa-trash-o" v-on:click="delete_post(post.id)"></i>
                         <i v-if="post.user_email===loggedin_user_email" class="fa fa-pencil-square-o" aria-hidden="true" v-on:click="update_currently_editing(post.id)"></i>
@@ -63,7 +66,7 @@
                     <button class="btn btn-danger btn-sm" v-on:click="submit_edit(post.id)">
                         Post Edit
                     </button>
-                    <button class="btn btn-warning btn-sm" v-on:click="update_currently_editing(0)">
+                    <button class="btn btn-warning btn-sm" v-on:click="update_currently_editing(0), clear_edit_content(null)">
                         <i class="fa fa-times"></i> Cancel
                     </button>
 

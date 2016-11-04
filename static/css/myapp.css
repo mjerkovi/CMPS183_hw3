@@ -37,6 +37,13 @@
 }
 
 /* line 33, ../sass/_main.scss */
+.edited_on {
+  display: inline-block;
+  margin-right: 30px;
+  color: #327bff;
+}
+
+/* line 39, ../sass/_main.scss */
 .edit_trash_button {
   float: right;
 }

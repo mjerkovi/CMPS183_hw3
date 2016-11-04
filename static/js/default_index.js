@@ -91,7 +91,7 @@ var app = function() {
                 post_id: post_id,
                 edit_content: self.vue.edit_content
             },
-            function () {
+            function (data) {
                 var idx = null;
                 for(var i = 0; i< self.vue.posts.length; i++){
                     if(post_id === self.vue.posts[i].id){
@@ -99,18 +99,18 @@ var app = function() {
                         break;
                     }
                 }
-                if (idx) {
-                    self.vue.posts[i].post_content = edit_content; //or maybe consider passing the data back from the
+                self.vue.posts[idx].post_content = data.post.post_content; //or maybe consider passing the data back from the
                                                                     // and do something like self.vue.posts[i].post_content = data.edit_content
-                }
+                self.vue.posts[idx].updated_on = data.post.updated_on;
                 self.vue.currently_editing = 0;
                 self.vue.edit_content = null;
             }
 
         )
+    }
 
-
-
+    self.clear_edit_content = function() {
+        self.vue.edit_content = null;
     }
 
     // Complete as needed.
@@ -134,7 +134,8 @@ var app = function() {
             add_post: self.add_post,
             delete_post: self.delete_post,
             update_currently_editing: self.update_currently_editing,
-            submit_edit: self.submit_edit
+            submit_edit: self.submit_edit,
+            clear_edit_content: self.clear_edit_content
         }
 
     });

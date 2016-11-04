@@ -26,8 +26,8 @@ def get_posts():
                 id = r.id,
                 user_email = r.user_email,
                 post_content = r.post_content,
-                created_on = r.created_on.strftime("%B %d 20%y   %H:%M"),
-                updated_on = r.updated_on,
+                created_on = r.created_on.strftime("%B %d 20%y   %H:%M:%S"),
+                updated_on = r.updated_on.strftime("%B %d 20%y   %H:%M:%S"),
                 user_name = get_user_name_from_email(r.user_email),
             )
             posts.append(t)
@@ -53,7 +53,15 @@ def add_post():
         post_content = request.vars.post_content
     )
     p = db.post(p_id)
-    return response.json(dict(post=p))
+    t = dict(
+        id=p.id,
+        user_email=p.user_email,
+        post_content=p.post_content,
+        created_on=p.created_on.strftime("%B %d 20%y   %H:%M:%S"),
+        updated_on=p.updated_on.strftime("%B %d 20%y   %H:%M:%S"),
+        user_name=get_user_name_from_email(p.user_email),
+    )
+    return response.json(dict(post=t))
 
 
 @auth.requires_signature()
@@ -66,5 +74,15 @@ def del_post():
 def edit_post():
     row = db(db.post.id == request.vars.post_id).select().first()
     row.update_record(post_content=request.vars.edit_content)
-    return "ok"
+    p = db.post(request.vars.post_id)
+    t = dict(
+        id=p.id,
+        user_email=p.user_email,
+        post_content=p.post_content,
+        created_on=p.created_on.strftime("%B %d 20%y   %H:%M:%S"),
+        updated_on=p.updated_on.strftime("%B %d 20%y   %H:%M:%S"),
+        user_name=get_user_name_from_email(p.user_email),
+    )
+    return response.json(dict(post=t))
+
 
