@@ -61,7 +61,7 @@
                     <br><br>
                 </div>
                 <div v-if="post.id == currently_editing">
-                    <textarea v-model="edit_content">
+                    <textarea v-model="edit_content" rows="5" cols="40">
                     </textarea>
                     <button class="btn btn-danger btn-sm" v-on:click="submit_edit(post.id)">
                         Post Edit
