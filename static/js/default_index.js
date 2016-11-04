@@ -56,6 +56,7 @@ var app = function() {
             function (data) {
                 $.web2py.enableElement($("#add_post_submit"));
                 self.vue.posts.unshift(data.post);
+                self.vue.form_content = null;
             }
         )
     }

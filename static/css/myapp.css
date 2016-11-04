@@ -23,27 +23,32 @@
 }
 
 /* line 21, ../sass/_main.scss */
+.post-content:hover {
+  background: #b8d4e8;
+}
+
+/* line 25, ../sass/_main.scss */
 .content {
   font-size: 25px;
   word-wrap: break-word;
   padding: 0px 25px 10px 10px;
 }
 
-/* line 27, ../sass/_main.scss */
+/* line 31, ../sass/_main.scss */
 .created_on {
   display: inline-block;
   margin-right: 30px;
   color: #327bff;
 }
 
-/* line 33, ../sass/_main.scss */
+/* line 39, ../sass/_main.scss */
 .edited_on {
   display: inline-block;
   margin-right: 30px;
   color: #327bff;
 }
 
-/* line 39, ../sass/_main.scss */
+/* line 45, ../sass/_main.scss */
 .edit_trash_button {
   float: right;
 }
