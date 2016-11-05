@@ -18,11 +18,10 @@ var app = function() {
             start_idx: start_idx,
             end_idx: end_idx
         }
-        //console.log(get_posts_url + "?" + $.param(pp))
         return get_posts_url + "?" + $.param(pp)
     }
 
-    //only called initially
+    //only called when page first loads
     self.get_posts = function () {
        $.getJSON(get_post_url(0, 4), function(data) {
             self.vue.posts = data.posts;
@@ -46,8 +45,8 @@ var app = function() {
         self.vue.is_adding_post = !self.vue.is_adding_post;
     }
 
-    //uses ajax to add a post to the post database, then the post is returned from the
-    //server once added to the database. it is then added to the front of the post list
+    //passes new post_content to the serve using ajax
+    //waits until serve responds to the ajax post to add the new post to the page
     self.add_post = function () {
         $.post(add_post_url,
             {
@@ -62,12 +61,13 @@ var app = function() {
     }
 
     self.delete_post = function(post_id) {
-
         $.post(del_post_url,
             {
                 post_id: post_id
             },
             function () {
+                //iterates over the post list to find the post to be deleted then deletes it from the post list using
+                //splice. this all happens after the post has been deleted on the server end.
                 var idx = null;
                 for(var i = 0; i < self.vue.posts.length; i++) {
                     if (post_id === self.vue.posts[i].id){
@@ -82,8 +82,13 @@ var app = function() {
         )
     }
 
-    self.update_currently_editing = function(post_id) {
+    //currently editing variable is used to only display the edit textarea for the post that is
+    //currently being edited. if there is no post currently being edited the default value of
+    //currently_editing is 0 because no post has post_id 0
+    self.update_currently_editing = function(post_id, post_content) {
         self.vue.currently_editing = post_id;
+        //needed so the textarea initially has the content of the post
+        self.vue.edit_content = post_content;
     }
 
     self.submit_edit = function(post_id) {
@@ -93,6 +98,8 @@ var app = function() {
                 edit_content: self.vue.edit_content
             },
             function (data) {
+                //waits for server to edit the content on it's end, then gets the post_content and updated_on data.
+                //then content and update_on are updated on the page.
                 var idx = null;
                 for(var i = 0; i< self.vue.posts.length; i++){
                     if(post_id === self.vue.posts[i].id){
@@ -100,9 +107,10 @@ var app = function() {
                         break;
                     }
                 }
-                self.vue.posts[idx].post_content = data.post.post_content; //or maybe consider passing the data back from the
-                                                                    // and do something like self.vue.posts[i].post_content = data.edit_content
+                self.vue.posts[idx].post_content = data.post.post_content;
                 self.vue.posts[idx].updated_on = data.post.updated_on;
+                //after there is a post none of the posts should have a textarea displayed so currently editing is
+                //set to zero. also edit_content is reset to null.
                 self.vue.currently_editing = 0;
                 self.vue.edit_content = null;
             }
@@ -114,7 +122,6 @@ var app = function() {
         self.vue.edit_content = null;
     }
 
-    // Complete as needed.
     self.vue = new Vue({
         el: "#vue-div",
         delimiters: ['${', '}'],
@@ -141,7 +148,6 @@ var app = function() {
 
     });
 
-    //uncomment when all this shit works
     self.get_posts();
     $("#vue-div").show();
 

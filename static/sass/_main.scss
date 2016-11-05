@@ -5,7 +5,7 @@
 }
 
 .post_list {
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 .post-content {
@@ -20,6 +20,10 @@
 
 .post-content:hover {
   background: #b8d4e8;
+  -webkit-transform: scale(1.028);
+  -ms-transform: scale(1.028);
+  transform: scale(1.028);
+
 }
 
 .content {
@@ -34,8 +38,6 @@
   color: #327bff;
 }
 
-
-
 .edited_on {
   display: inline-block;
   margin-right: 30px;
@@ -44,4 +46,8 @@
 
 .edit_trash_button {
   float: right;
+}
+
+#add-new-post {
+  padding-top: 20px;
 }

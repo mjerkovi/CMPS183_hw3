@@ -11,10 +11,6 @@ def get_user_name_from_email(email):
         return ' '.join([u.first_name, u.last_name])
 
 def get_posts():
-    """This controller is used to get the posts.  Follow what we did in lecture 10, to ensure
-    that the first time, we get 4 posts max, and each time the "load more" button is pressed,
-    we load at most 4 more posts."""
-    # Implement me!
     start_idx = int(request.vars.start_idx) if request.vars.start_idx is not None else 0
     end_idx = int(request.vars.end_idx) if request.vars.end_idx is not None else 0
     posts = []
@@ -42,13 +38,9 @@ def get_posts():
             loggedin_user_email = loggedin_user_email,
         ))
 
-
-
-# Note that we need the URL to be signed, as this changes the db.
 @auth.requires_signature()
 def add_post():
-    """Here you get a new post and add it.  Return what you want."""
-    # Implement me!
+    #inserts post into the the database then returns the post as a dictionary
     p_id = db.post.insert(
         post_content = request.vars.post_content
     )
@@ -66,12 +58,13 @@ def add_post():
 
 @auth.requires_signature()
 def del_post():
-    """Used to delete a post."""
+    #deletes post and return "ok" = 200
     db(db.post.id == request.vars.post_id).delete()
     return "ok"
 
 @auth.requires_signature()
 def edit_post():
+    #updates the post in the database then returns the new updated post as a dictionary
     row = db(db.post.id == request.vars.post_id).select().first()
     row.update_record(post_content=request.vars.edit_content)
     p = db.post(request.vars.post_id)

@@ -6,7 +6,7 @@
 
 /* line 7, ../sass/_main.scss */
 .post_list {
-  padding-top: 10px;
+  padding-top: 20px;
 }
 
 /* line 11, ../sass/_main.scss */
@@ -25,30 +25,38 @@
 /* line 21, ../sass/_main.scss */
 .post-content:hover {
   background: #b8d4e8;
+  -webkit-transform: scale(1.028);
+  -ms-transform: scale(1.028);
+  transform: scale(1.028);
 }
 
-/* line 25, ../sass/_main.scss */
+/* line 29, ../sass/_main.scss */
 .content {
   font-size: 25px;
   word-wrap: break-word;
   padding: 0px 25px 10px 10px;
 }
 
-/* line 31, ../sass/_main.scss */
+/* line 35, ../sass/_main.scss */
 .created_on {
   display: inline-block;
   margin-right: 30px;
   color: #327bff;
 }
 
-/* line 39, ../sass/_main.scss */
+/* line 41, ../sass/_main.scss */
 .edited_on {
   display: inline-block;
   margin-right: 30px;
   color: #327bff;
 }
 
-/* line 45, ../sass/_main.scss */
+/* line 47, ../sass/_main.scss */
 .edit_trash_button {
   float: right;
+}
+
+/* line 51, ../sass/_main.scss */
+#add-new-post {
+  padding-top: 20px;
 }
