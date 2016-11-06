@@ -151,6 +151,7 @@ var app = function() {
     self.get_posts();
     $("#vue-div").show();
 
+
     return self;
 };
 
